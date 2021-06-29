@@ -122,3 +122,5 @@ BinaryHeap.prototype = {
     }
   }
 };
+
+export default BinaryHeap;
