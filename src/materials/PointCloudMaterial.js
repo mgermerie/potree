@@ -12,6 +12,31 @@ import {PointSizeType, PointShape, TreeType, ElevationGradientRepeat} from "../d
 // http://stackoverflow.com/questions/3717226/radius-of-projected-sphere
 //
 
+const ShaderChunk = THREE.ShaderChunk;
+
+// Resolve Includes
+
+const includePattern = /^[ \t]*#include +<([\w\d./]+)>/gm;
+
+function resolveIncludes( string ) {
+
+	return string.replace( includePattern, includeReplacer );
+
+}
+
+function includeReplacer( match, include ) {
+
+	const string = ShaderChunk[ include ];
+
+	if ( string === undefined ) {
+
+		throw new Error( 'Can not resolve #include <' + include + '>' );
+
+	}
+
+	return resolveIncludes( string );
+
+}
 
 export class PointCloudMaterial extends THREE.RawShaderMaterial {
 	constructor (parameters = {}) {
@@ -203,6 +228,9 @@ export class PointCloudMaterial extends THREE.RawShaderMaterial {
 		}else{
 			fs = `${definesString}\n${fs}`;
 		}
+
+		vs = resolveIncludes( vs );
+		fs = resolveIncludes( fs );
 
 		this.vertexShader = vs;
 		this.fragmentShader = fs;
