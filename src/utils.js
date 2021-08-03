@@ -1,5 +1,6 @@
 
 import * as THREE from "three";
+import TWEEN from '@tweenjs/tween.js';
 import {XHRFactory} from "./XHRFactory.js";
 import {Volume} from "./utils/Volume.js";
 import {Profile} from "./utils/Profile.js";

@@ -1,5 +1,6 @@
 
 import * as THREE from "three";
+import TWEEN from '@tweenjs/tween.js';
 import {Utils} from "../utils.js";
 
 export class TransformationTool {
