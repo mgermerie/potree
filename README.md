@@ -1,4 +1,27 @@
+# Potree/iTowns
 
+We fork **Potree** to add these features in **itowns** viewer.
+
+We have developed potree : 
+- **WebGl 2.0 partial support**
+  - [X] instance webgl 2.0 renderer
+  - [X] support shader
+  - [ ] `OES_vertex_array_object` is handling by `potree`, not by `THREE`
+  - [ ]  `PointCloudMaterial` doesn't use `THREE shader building`.
+- **Log depth buffer support**
+   - [ ] Shader and material support
+   - [ ] wrong rendering with HQ (hight quality)
+   - [ ] wrong depth paraboloid point shape
+- **Up THREE to 133.1**
+- **Replace libs packages by npm packages**
+   - [x] THREE
+   - [x] Spectrum
+   - [x] jquery-gui
+   - [x] Tween
+   - [x] d3
+   - [ ] proj4
+   - [ ] i18next
+   - [ ] jquery-3.1.1
 
 # About
 
