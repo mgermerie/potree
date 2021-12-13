@@ -1,10 +1,12 @@
 
-#if defined paraboloid_point_shape
+#if defined USE_LOGDEPTHBUF_EXT || defined paraboloid_point_shape
 	#extension GL_EXT_frag_depth : enable
 #endif
-
 precision highp float;
 precision highp int;
+
+#include <common>
+#include <logdepthbuf_pars_fragment>
 
 uniform mat4 viewMatrix;
 uniform mat4 uViewInv;
@@ -37,6 +39,7 @@ float specularStrength = 1.0;
 
 void main() {
 
+	#include <logdepthbuf_fragment>
 	// gl_FragColor = vec4(vColor, 1.0);
 
 	vec3 color = vColor;
@@ -69,7 +72,11 @@ void main() {
 		pos = pos / pos.w;
 		float expDepth = pos.z;
 		depth = (pos.z + 1.0) / 2.0;
-		gl_FragDepthEXT = depth;
+		// no log depth
+		// gl_FragDepthEXT = depth;
+		// log depth
+		gl_FragDepthEXT =  log2(1.0 + expDepth) * logDepthBufFC * 0.5;
+
 		
 		#if defined(color_type_depth)
 			color.r = linearDepth;
@@ -77,7 +84,10 @@ void main() {
 		#endif
 		
 		#if defined(use_edl)
-			gl_FragColor.a = log2(linearDepth);
+			// attention doit gerer le log depth!!!
+			// ne marche pas vraiment, effet de ligne
+			gl_FragColor.a = vLogDepth;
+			// gl_FragColor.a = vFragDepth;
 		#endif
 		
 	#else

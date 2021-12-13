@@ -1,3 +1,7 @@
+#include <common>
+#include <logdepthbuf_pars_vertex>
+
+#extension GL_EXT_frag_depth : enable
 
 precision mediump float;
 precision mediump int;
@@ -16,4 +20,6 @@ void main() {
 	vec4 mvPosition = modelViewMatrix * vec4(position,1.0);
 
 	gl_Position = projectionMatrix * mvPosition;
+
+	#include <logdepthbuf_vertex>
 }

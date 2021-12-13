@@ -618,7 +618,7 @@ export class ProfileWindow extends EventDispatcher {
 	}
 
 	initTHREE () {
-		this.renderer = new THREE.WebGLRenderer({alpha: true, premultipliedAlpha: false});
+		this.renderer = new THREE.WebGL1Renderer({alpha: true, premultipliedAlpha: false});
 		this.renderer.setClearColor(0x000000, 0);
 		this.renderer.setSize(10, 10);
 		this.renderer.autoClear = false;
@@ -630,6 +630,8 @@ export class ProfileWindow extends EventDispatcher {
 
 		{
 			let gl = this.renderer.getContext();
+
+			gl.getExtension('EXT_frag_depth');
 
 			if(gl.createVertexArray == null){
 				let extVAO = gl.getExtension('OES_vertex_array_object');

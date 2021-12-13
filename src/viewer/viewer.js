@@ -1430,11 +1430,13 @@ export class Viewer extends EventDispatcher{
 
 		let context = canvas.getContext('webgl', contextAttributes );
 
-		this.renderer = new THREE.WebGLRenderer({
+		this.renderer = new THREE.WebGL1Renderer({
 			alpha: true, 
 			premultipliedAlpha: false,
 			canvas: canvas,
-			context: context});
+			context: context,
+			logarithmicDepthBuffer: true
+		});
 		this.renderer.sortObjects = false;
 		this.renderer.setSize(width, height);
 		this.renderer.autoClear = false;

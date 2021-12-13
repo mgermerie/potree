@@ -163,6 +163,7 @@ export class HQSplatRenderer{
 				depthMaterial.uniforms.uFilterNumberOfReturnsRange.value = material.uniforms.uFilterNumberOfReturnsRange.value;
 				depthMaterial.uniforms.uFilterGPSTimeClipRange.value = material.uniforms.uFilterGPSTimeClipRange.value;
 				depthMaterial.uniforms.uFilterPointSourceIDClipRange.value = material.uniforms.uFilterPointSourceIDClipRange.value;
+				depthMaterial.uniforms.logDepthBufFC.value = material.uniforms.logDepthBufFC.value;
 
 				depthMaterial.clipTask = material.clipTask;
 				depthMaterial.clipMethod = material.clipMethod;
@@ -206,6 +207,7 @@ export class HQSplatRenderer{
 				attributeMaterial.uniforms.uFilterNumberOfReturnsRange.value = material.uniforms.uFilterNumberOfReturnsRange.value;
 				attributeMaterial.uniforms.uFilterGPSTimeClipRange.value = material.uniforms.uFilterGPSTimeClipRange.value;
 				attributeMaterial.uniforms.uFilterPointSourceIDClipRange.value = material.uniforms.uFilterPointSourceIDClipRange.value;
+				attributeMaterial.uniforms.logDepthBufFC.value = material.uniforms.logDepthBufFC.value;
 
 				attributeMaterial.elevationGradientRepeat = material.elevationGradientRepeat;
 				attributeMaterial.elevationRange = material.elevationRange;

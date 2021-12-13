@@ -1,13 +1,14 @@
+precision mediump float;
+precision mediump int;
 
 #extension GL_EXT_frag_depth : enable
+#include <logdepthbuf_pars_fragment>
 
 // 
 // adapted from the EDL shader code from Christian Boucheny in cloud compare:
 // https://github.com/cloudcompare/trunk/tree/master/plugins/qEDL/shaders/EDL
 //
 
-precision mediump float;
-precision mediump int;
 
 uniform float screenWidth;
 uniform float screenHeight;
@@ -66,7 +67,12 @@ void main(){
 		float pz = dp.z / dp.w;
 		float fragDepth = (pz + 1.0) / 2.0;
 
-		gl_FragDepthEXT = fragDepth;
+		// gl_FragDepthEXT =  fragDepth;
+		gl_FragDepthEXT =  log2(1.0 + dp.w) * logDepthBufFC * 0.5;
+
+		// log2( vFragDepth ) * logDepthBufFC * 0.5
+		// #include <logdepthbuf_fragment>
+
 	}
 
 	if(depth == 0.0){

@@ -238,13 +238,15 @@ export class EDLRenderer{
 
 				let material = pointcloud.material;
 				material.weighted = false;
-				material.useLogarithmicDepthBuffer = false;
+				material.useLogarithmicDepthBuffer = true;
 				material.useEDL = true;
 
 				material.screenWidth = width;
 				material.screenHeight = height;
 				material.uniforms.visibleNodes.value = pointcloud.material.visibleNodesTexture;
 				material.uniforms.octreeSize.value = octreeSize;
+				material.uniforms.logDepthBufFC.value = 2.0 / ( Math.log( camera.far + 1.0 ) / Math.LN2);
+
 				material.spacing = pointcloud.pcoGeometry.spacing; // * Math.max(pointcloud.scale.x, pointcloud.scale.y, pointcloud.scale.z);
 			}
 			
@@ -315,7 +317,9 @@ export class EDLRenderer{
 			uniforms.edlStrength.value = viewer.edlStrength;
 			uniforms.radius.value = viewer.edlRadius;
 			uniforms.opacity.value = viewer.edlOpacity; // HACK
-			
+
+			uniforms.logDepthBufFC.value = 2.0 / ( Math.log( camera.far + 1.0 ) / Math.LN2);
+
 			Utils.screenPass.render(viewer.renderer, this.edlMaterial);
 
 			if(this.screenshot){

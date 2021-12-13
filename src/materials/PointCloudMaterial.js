@@ -48,6 +48,7 @@ export class PointCloudMaterial extends THREE.RawShaderMaterial {
 		this.fog = false;
 		this._treeType = treeType;
 		this._useEDL = false;
+		this._isLogarithmicDepthBuffer = false;
 		this.defines = new Map();
 
 		this.ranges = new Map();
@@ -81,6 +82,7 @@ export class PointCloudMaterial extends THREE.RawShaderMaterial {
 
 		this.uniforms = {
 			level:				{ type: "f", value: 0.0 },
+			logDepthBufFC:   	{ type: "f", value: 0.0 },
 			vnStart:			{ type: "f", value: 0.0 },
 			spacing:			{ type: "f", value: 1.0 },
 			blendHardness:		{ type: "f", value: 2.0 },
@@ -231,6 +233,11 @@ export class PointCloudMaterial extends THREE.RawShaderMaterial {
 
 	getDefines () {
 		let defines = [];
+		if (this.isLogarithmicDepthBuffer) {
+			defines.push("#define USE_LOGDEPTHBUF");
+			defines.push("#define USE_LOGDEPTHBUF_EXT");
+			defines.push("#define EPSILON 1e-6");
+		}
 
 		if (this.pointSizeType === PointSizeType.FIXED) {
 			defines.push('#define fixed_point_size');
@@ -602,6 +609,17 @@ export class PointCloudMaterial extends THREE.RawShaderMaterial {
 	set useEDL (value) {
 		if (this._useEDL !== value) {
 			this._useEDL = value;
+			this.updateShaderSource();
+		}
+	}
+
+	get isLogarithmicDepthBuffer(){
+		return this._isLogarithmicDepthBuffer;
+	}
+
+	set isLogarithmicDepthBuffer (value) {
+		if (this._isLogarithmicDepthBuffer !== value) {
+			this._isLogarithmicDepthBuffer = value;
 			this.updateShaderSource();
 		}
 	}

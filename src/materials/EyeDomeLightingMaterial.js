@@ -18,6 +18,7 @@ export class EyeDomeLightingMaterial extends THREE.RawShaderMaterial{
 
 		let uniforms = {
 			screenWidth:    { type: 'f', 	value: 0 },
+			logDepthBufFC:    { type: 'f', 	value: 0 },
 			screenHeight:   { type: 'f', 	value: 0 },
 			edlStrength:    { type: 'f', 	value: 1.0 },
 			uNear:          { type: 'f', 	value: 1.0 },
@@ -45,6 +46,10 @@ export class EyeDomeLightingMaterial extends THREE.RawShaderMaterial{
 		let defines = '';
 
 		defines += '#define NEIGHBOUR_COUNT ' + this.neighbourCount + '\n';
+
+		defines += "#define USE_LOGDEPTHBUF" + '\n';
+		defines += "#define USE_LOGDEPTHBUF_EXT" + '\n';
+		defines += "#define EPSILON 1e-6" + '\n';
 
 		return defines;
 	}
