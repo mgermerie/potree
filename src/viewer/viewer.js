@@ -32,6 +32,7 @@ import {DeviceOrientationControls} from "../navigation/DeviceOrientationControls
 import {VRControls} from "../navigation/VRControls.js";
 import { EventDispatcher } from "../EventDispatcher.js";
 import { ClassificationScheme } from "../materials/ClassificationScheme.js";
+import ShaderChunk from "../materials/ShaderChunk.js";
 import { VRButton } from '../../libs/three.js/extra/VRButton.js';
 
 import JSON5 from "../../libs/json5-2.1.3/json5.mjs";
@@ -1407,35 +1408,12 @@ export class Viewer extends EventDispatcher{
 		let width = this.renderArea.clientWidth;
 		let height = this.renderArea.clientHeight;
 
-		let contextAttributes = {
+		this.renderer = new THREE.WebGLRenderer({
 			alpha: true,
 			depth: true,
 			stencil: false,
-			antialias: false,
-			//premultipliedAlpha: _premultipliedAlpha,
 			preserveDrawingBuffer: true,
 			powerPreference: "high-performance",
-		};
-
-		// let contextAttributes = {
-		// 	alpha: false,
-		// 	preserveDrawingBuffer: true,
-		// };
-
-		// let contextAttributes = {
-		// 	alpha: false,
-		// 	preserveDrawingBuffer: true,
-		// };
-
-		let canvas = document.createElement("canvas");
-
-		let context = canvas.getContext('webgl', contextAttributes );
-
-		this.renderer = new THREE.WebGL1Renderer({
-			alpha: true, 
-			premultipliedAlpha: false,
-			canvas: canvas,
-			context: context,
 			logarithmicDepthBuffer: true
 		});
 		this.renderer.sortObjects = false;

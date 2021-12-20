@@ -73,6 +73,7 @@ export class PointCloudMaterial extends THREE.RawShaderMaterial {
 		this.fog = false;
 		this._treeType = treeType;
 		this._useEDL = false;
+		this._isWebGL2 = false;
 		this._isLogarithmicDepthBuffer = false;
 		this.defines = new Map();
 
@@ -261,6 +262,12 @@ export class PointCloudMaterial extends THREE.RawShaderMaterial {
 
 	getDefines () {
 		let defines = [];
+
+		if (this.isWebGL2) {
+			defines.push("#version 300 es");
+			defines.push("#define WEBGL2 true");
+		}
+
 		if (this.isLogarithmicDepthBuffer) {
 			defines.push("#define USE_LOGDEPTHBUF");
 			defines.push("#define USE_LOGDEPTHBUF_EXT");
@@ -637,6 +644,17 @@ export class PointCloudMaterial extends THREE.RawShaderMaterial {
 	set useEDL (value) {
 		if (this._useEDL !== value) {
 			this._useEDL = value;
+			this.updateShaderSource();
+		}
+	}
+
+	get isWebGL2(){
+		return this._isWebGL2;
+	}
+
+	set isWebGL2 (value) {
+		if (this._isWebGL2 !== value) {
+			this._isWebGL2 = value;
 			this.updateShaderSource();
 		}
 	}

@@ -618,7 +618,7 @@ export class ProfileWindow extends EventDispatcher {
 	}
 
 	initTHREE () {
-		this.renderer = new THREE.WebGL1Renderer({alpha: true, premultipliedAlpha: false});
+		this.renderer = new THREE.WebGLRenderer({alpha: true, premultipliedAlpha: false});
 		this.renderer.setClearColor(0x000000, 0);
 		this.renderer.setSize(10, 10);
 		this.renderer.autoClear = false;

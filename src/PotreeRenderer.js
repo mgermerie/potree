@@ -1078,6 +1078,7 @@ export class Renderer {
 			}
 		}
 
+		material.isWebGL2 = this.threeRenderer.capabilities.isWebGL2;
 		material.isLogarithmicDepthBuffer = this.threeRenderer.capabilities.logarithmicDepthBuffer;
 
 		{ // UPDATE SHADER AND TEXTURES

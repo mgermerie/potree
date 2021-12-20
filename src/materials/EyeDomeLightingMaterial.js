@@ -42,6 +42,13 @@ export class EyeDomeLightingMaterial extends THREE.RawShaderMaterial{
 		this.neighbourCount = 8;
 	}
 
+	onBeforeCompile(shader, renderer) {
+        if (renderer.capabilities.isWebGL2) {
+            this.defines.WEBGL2 = true;
+            shader.glslVersion = '300 es';
+        }
+    }
+
 	getDefines() {
 		let defines = '';
 

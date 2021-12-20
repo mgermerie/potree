@@ -1,5 +1,5 @@
-
-#extension GL_EXT_frag_depth : enable
+#include <potree/WebGL2_pars_fragment>
+#include <logdepthbuf_pars_fragment>
 
 precision mediump float;
 precision mediump int;

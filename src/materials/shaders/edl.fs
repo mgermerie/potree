@@ -1,10 +1,9 @@
 precision mediump float;
 precision mediump int;
-
-#extension GL_EXT_frag_depth : enable
+#include <potree/WebGL2_pars_fragment>
 #include <logdepthbuf_pars_fragment>
 
-// 
+//
 // adapted from the EDL shader code from Christian Boucheny in cloud compare:
 // https://github.com/cloudcompare/trunk/tree/master/plugins/qEDL/shaders/EDL
 //

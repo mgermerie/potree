@@ -2,6 +2,10 @@
 precision mediump float;
 precision mediump int;
 
+#include <potree/WebGL2_pars_vertex>
+#include <common>
+#include <logdepthbuf_pars_vertex>
+
 attribute vec3 position;
 attribute vec2 uv;
 

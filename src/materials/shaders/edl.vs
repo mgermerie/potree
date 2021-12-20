@@ -1,7 +1,8 @@
+#include <potree/WebGL2_pars_vertex>
 #include <common>
 #include <logdepthbuf_pars_vertex>
 
-#extension GL_EXT_frag_depth : enable
+// #extension GL_EXT_frag_depth : enable
 
 precision mediump float;
 precision mediump int;

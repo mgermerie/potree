@@ -1,12 +1,10 @@
-#if defined USE_LOGDEPTHBUF_EXT
-	#extension GL_EXT_frag_depth : enable
-#endif
-
 precision highp float;
 precision highp int;
 
+#include <potree/WebGL2_pars_vertex>
 #include <common>
 #include <logdepthbuf_pars_vertex>
+
 
 #define max_clip_polygons 8
 #define PI 3.141592653589793
@@ -136,7 +134,7 @@ varying float 	vRadius;
 varying float 	vPointSize;
 
 
-float round(float number){
+float potree_round(float number){
 	return floor(number + 0.5);
 }
 
@@ -229,15 +227,15 @@ float getLOD(){
 		
 		vec3 index3d = (position-offset) / nodeSizeAtLevel;
 		index3d = floor(index3d + 0.5);
-		int index = int(round(4.0 * index3d.x + 2.0 * index3d.y + index3d.z));
+		int index = int(potree_round(4.0 * index3d.x + 2.0 * index3d.y + index3d.z));
 		
 		vec4 value = texture2D(visibleNodes, vec2(float(iOffset) / 2048.0, 0.0));
-		int mask = int(round(value.r * 255.0));
+		int mask = int(potree_round(value.r * 255.0));
 
 		if(isBitSet(mask, index)){
 			// there are more visible child nodes at this position
-			int advanceG = int(round(value.g * 255.0)) * 256;
-			int advanceB = int(round(value.b * 255.0));
+			int advanceG = int(potree_round(value.g * 255.0)) * 256;
+			int advanceB = int(potree_round(value.b * 255.0));
 			int advanceChild = numberOfOnes(mask, index - 1);
 			int advance = advanceG + advanceB + advanceChild;
 
@@ -269,10 +267,10 @@ float getSpacing(){
 		
 		vec3 index3d = (position-offset) / nodeSizeAtLevel;
 		index3d = floor(index3d + 0.5);
-		int index = int(round(4.0 * index3d.x + 2.0 * index3d.y + index3d.z));
+		int index = int(potree_round(4.0 * index3d.x + 2.0 * index3d.y + index3d.z));
 		
 		vec4 value = texture2D(visibleNodes, vec2(float(iOffset) / 2048.0, 0.0));
-		int mask = int(round(value.r * 255.0));
+		int mask = int(potree_round(value.r * 255.0));
 		float spacingFactor = value.a;
 
 		if(i > 0.0){
@@ -282,8 +280,8 @@ float getSpacing(){
 
 		if(isBitSet(mask, index)){
 			// there are more visible child nodes at this position
-			int advanceG = int(round(value.g * 255.0)) * 256;
-			int advanceB = int(round(value.b * 255.0));
+			int advanceG = int(potree_round(value.g * 255.0)) * 256;
+			int advanceB = int(potree_round(value.b * 255.0));
 			int advanceChild = numberOfOnes(mask, index - 1);
 			int advance = advanceG + advanceB + advanceChild;
 

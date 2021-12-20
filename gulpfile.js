@@ -72,6 +72,8 @@ let shaders = [
 	"src/materials/shaders/edl.fs",
 	"src/materials/shaders/blur.vs",
 	"src/materials/shaders/blur.fs",
+	"src/materials/shaders/WebGL2_pars_vertex.vs",
+	"src/materials/shaders/WebGL2_pars_fragment.fs",
 ];
 
 // For development, it is now possible to use 'gulp webserver'

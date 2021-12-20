@@ -19,6 +19,13 @@ export class NormalizationMaterial extends THREE.RawShaderMaterial{
 		});
 	}
 
+	onBeforeCompile(shader, renderer) {
+        if (renderer.capabilities.isWebGL2) {
+            this.defines.WEBGL2 = true;
+            shader.glslVersion = '300 es';
+        }
+    }
+
 	getDefines() {
 		let defines = '';
 

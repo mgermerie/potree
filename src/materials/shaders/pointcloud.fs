@@ -1,12 +1,14 @@
 
-#if defined USE_LOGDEPTHBUF_EXT || defined paraboloid_point_shape
-	#extension GL_EXT_frag_depth : enable
-#endif
+#include <potree/WebGL2_pars_fragment>
 precision highp float;
 precision highp int;
-
 #include <common>
 #include <logdepthbuf_pars_fragment>
+
+// #if defined USE_LOGDEPTHBUF_EXT || defined paraboloid_point_shape
+// 	#extension GL_EXT_frag_depth : enable
+// #endif
+
 
 uniform mat4 viewMatrix;
 uniform mat4 uViewInv;
