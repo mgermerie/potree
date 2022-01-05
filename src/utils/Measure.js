@@ -329,6 +329,7 @@ export class Measure extends THREE.Object3D {
 
 		this.add(this.azimuth.node);
 		this.isGeocentric = viewer.isGeocentric;
+		this.measureCoordinateCallback = viewer.measureCoordinateCallback;
 
 	}
 

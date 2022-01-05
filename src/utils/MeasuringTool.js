@@ -170,7 +170,6 @@ export class MeasuringTool extends EventDispatcher{
 		let domElement = this.viewer.renderer.domElement;
 
 		let measure = new Measure(this.viewer);
-		measure.measureCoordinateCallback = this.viewer.measureCoordinateCallback;
 
 		this.dispatchEvent({
 			type: 'start_inserting_measurement',
