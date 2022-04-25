@@ -733,7 +733,6 @@ export class PropertiesPanel{
 			});
 
 			let updateHeightRange = function () {
-				
 
 				let aPosition = pointcloud.getAttribute("position");
 
@@ -752,8 +751,10 @@ export class PropertiesPanel{
 					let box = [pointcloud.pcoGeometry.tightBoundingBox, pointcloud.getBoundingBoxWorld()]
 						.find(v => v !== undefined);
 
-					pointcloud.updateMatrixWorld(true);
-					box = Utils.computeTransformedBoundingBox(box, pointcloud.matrixWorld);
+					if (!pointcloud.material.isGeocentric) {
+						pointcloud.updateMatrixWorld(true);
+						box = Utils.computeTransformedBoundingBox(box, pointcloud.matrixWorld);
+					}
 
 					let bWidth = box.max.z - box.min.z;
 					bMin = box.min.z - 0.2 * bWidth;

@@ -178,6 +178,7 @@ export class PointCloudMaterial extends THREE.RawShaderMaterial {
 			uFilterPointSourceIDClipRange:		{ type: "fv", value: [0, 65535]},
 			matcapTextureUniform: 	{ type: "t", value: this.matcapTexture },
 			backfaceCulling: { type: "b", value: false },
+			isGeocentric: { type: "b", value: parameters.isGeocentric || false },
 		};
 
 		this.classification = ClassificationScheme.DEFAULT;
@@ -400,6 +401,17 @@ export class PointCloudMaterial extends THREE.RawShaderMaterial {
 		if(this.uniforms.backfaceCulling.value !== value){
 			this.uniforms.backfaceCulling.value = value;
 			this.dispatchEvent({type: 'backface_changed', target: this});
+		}
+	}
+
+	get isGeocentric() {
+		return this.uniforms.isGeocentric.value;
+	}
+
+	set isGeocentric(value) {
+		if(this.uniforms.isGeocentric.value !== value){
+			this.uniforms.isGeocentric.value = value;
+			this.dispatchEvent({type: 'isGeocentric', target: this});
 		}
 	}
 
