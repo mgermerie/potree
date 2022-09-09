@@ -5,6 +5,7 @@ on:
   pull_request:
     branches:
       - itowns_potree
+  workflow_dispatch: {}
 
 name: integration
 env:
