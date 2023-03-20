@@ -83,6 +83,7 @@ import {LRU} from "./LRU.js";
 import {OctreeLoader} from "./modules/loader/2.0/OctreeLoader.js";
 import {POCLoader} from "./loader/POCLoader.js";
 import {EptLoader} from "./loader/EptLoader.js";
+import {CopcLoader} from "./loader/CopcLoader.js";
 import {PointCloudOctree} from "./PointCloudOctree.js";
 import {WorkerPool} from "./WorkerPool.js";
 import {ShaderChunk} from 'three';
@@ -132,7 +133,11 @@ let resourcePath = scriptPath + '/resources';
 // resourcePath:build/potree/resources
 export {scriptPath, resourcePath};
 
-
+/**
+ * @param {String} path
+ * @param {String} name
+ * @param {function} callback
+ */
 export function loadPointCloud(path, name, callback){
 	let loaded = function(e){
 		e.pointcloud.name = name;
@@ -140,7 +145,6 @@ export function loadPointCloud(path, name, callback){
 	};
 
 	let promise = new Promise( resolve => {
-
 		// load pointcloud
 		if (!path){
 			// TODO: callback? comment? Hello? Bueller? Anyone?
@@ -155,6 +159,17 @@ export function loadPointCloud(path, name, callback){
 					resolve({type: 'pointcloud_loaded', pointcloud: pointcloud});
 				}
 			});
+        } else if (path.endsWith('.copc.laz')) {
+			CopcLoader.load(path, function(geometry) {
+				if (!geometry) {
+					console.error(new Error(`failed to load point cloud from URL: ${path}`));
+				}
+				else {
+					let pointcloud = new PointCloudOctree(geometry);
+					//loaded(pointcloud);
+					resolve({type: 'pointcloud_loaded', pointcloud: pointcloud});
+				}
+            });
 		} else if (path.indexOf('cloud.js') > 0) {
 			POCLoader.load(path, function (geometry) {
 				if (!geometry) {
@@ -167,7 +182,7 @@ export function loadPointCloud(path, name, callback){
 				}
 			});
 		} else if (path.indexOf('metadata.json') > 0) {
-			Potree.OctreeLoader.load(path).then(e => {
+			OctreeLoader.load(path).then(e => {
 				let geometry = e.geometry;
 
 				if(!geometry){

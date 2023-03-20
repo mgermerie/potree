@@ -1,0 +1,37 @@
+{
+    "include": [ "src/Potree.js" ],
+    "exclude": [ "node_modules", "build", "example" ],
+    "compilerOptions": {
+        /* Type Checking */
+        "strict": true,
+        /* Modules */
+        "moduleResolution": "nodenext",
+        "baseUrl": ".",
+        //"paths": {
+        //    "*": [ "src/*" ]
+        //},
+        /* Emit */
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "outDir": "build",
+        /* JavaScript Support */
+        "allowJs": true,
+        "checkJs": true, // uncomment for type checking of js files
+        /* Interop Constraints */
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        /* Language and Environment */
+        "target": "esnext",
+        /* Completeness */
+        "skipLibCheck": true,
+        /* Plugins */
+        "plugins": [
+            {
+                "transform": "typescript-transform-paths",
+                "afterDeclarations": true,
+                "exclude": [ "**/node_modules/**" ]
+            }
+        ]
+    }
+}
