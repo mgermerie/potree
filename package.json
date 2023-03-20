@@ -41,7 +41,6 @@
   "author": "Markus Schütz",
   "license": "BSD-2-CLAUSE",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^11.0.0",
     "@rollup/plugin-node-resolve": "^11.2.0",
     "@types/three": "^0.149.0"
   }
