@@ -1,5 +1,3 @@
-const copc = require('copc');
-
 export class CopcLoader {
     /**
      * @param {String} file
@@ -15,7 +13,6 @@ export class CopcLoader {
             }).then((res) => res.arrayBuffer())
             .then((buffer) => new Uint8Array(buffer));
 
-        console.error(copc.Las);
         console.error('Not implemented');
         console.error(await get(0, 10));
     }

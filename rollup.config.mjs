@@ -1,0 +1,42 @@
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
+
+export default [
+	{
+		input: 'src/Potree.js',
+		treeshake: false,
+        context: 'this',
+		output: {
+			file: 'build/potree/potree.js',
+			format: 'umd',
+			name: 'Potree',
+			sourcemap: true,
+		},
+		plugins: [ resolve(), json() ]
+	},{
+		input: 'src/workers/BinaryDecoderWorker.js',
+		output: {
+			file: 'build/potree/workers/BinaryDecoderWorker.js',
+			format: 'es',
+			name: 'Potree',
+			sourcemap: false
+		}
+	},{
+		input: 'src/modules/loader/2.0/DecoderWorker.js',
+		output: {
+			file: 'build/potree/workers/2.0/DecoderWorker.js',
+			format: 'es',
+			name: 'Potree',
+			sourcemap: false
+		}
+	},{
+		input: 'src/modules/loader/2.0/DecoderWorker_brotli.js',
+		output: {
+			file: 'build/potree/workers/2.0/DecoderWorker_brotli.js',
+			format: 'es',
+			name: 'Potree',
+			sourcemap: false
+		}
+	}
+]
