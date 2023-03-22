@@ -19,6 +19,7 @@ export default [
             }),
             commonjs(),
             json(),
+            nodePolyfills()
         ]
 	},{
 		input: 'src/workers/BinaryDecoderWorker.js',
