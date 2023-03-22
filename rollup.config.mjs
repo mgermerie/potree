@@ -1,19 +1,25 @@
-import resolve from '@rollup/plugin-node-resolve';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
+import nodePolyfills from 'rollup-plugin-polyfill-node';
 
 export default [
 	{
 		input: 'src/Potree.js',
 		treeshake: false,
-        context: 'this',
 		output: {
 			file: 'build/potree/potree.js',
 			format: 'umd',
 			name: 'Potree',
 			sourcemap: true,
 		},
-		plugins: [ resolve(), json() ]
+		plugins: [
+            nodeResolve({
+                browser: true,
+            }),
+            commonjs(),
+            json(),
+        ]
 	},{
 		input: 'src/workers/BinaryDecoderWorker.js',
 		output: {
